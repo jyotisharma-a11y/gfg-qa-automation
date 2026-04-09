@@ -1,1 +1,10 @@
-[]
+[
+  {"id": "home", "url": "https://www.geeksforgeeks.org/", "title": "GeeksforGeeks"},
+  {"id": "python", "url": "https://www.geeksforgeeks.org/python-programming-language/", "title": "Python"},
+  {"id": "dsa", "url": "https://www.geeksforgeeks.org/data-structures/", "title": "Data Structures"},
+  {"id": "courses", "url": "https://www.geeksforgeeks.org/courses", "title": "Courses"},
+  {"id": "practice", "url": "https://www.geeksforgeeks.org/explore", "title": "Practice"},
+  {"id": "algorithms", "url": "https://www.geeksforgeeks.org/fundamentals-of-algorithms/", "title": "Algorithms"},
+  {"id": "java", "url": "https://www.geeksforgeeks.org/java/", "title": "Java"},
+  {"id": "cpp", "url": "https://www.geeksforgeeks.org/c-plus-plus/", "title": "C++"}
+]
