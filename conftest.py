@@ -6,7 +6,7 @@ from utils.helpers import load_test_data
 @pytest.fixture(scope="session")
 def browser():
     with sync_playwright() as p:
-        b = p.chromium.launch(headless=True)
+        b = p.chromium.launch(headless=False)
         yield b
         b.close()
 
