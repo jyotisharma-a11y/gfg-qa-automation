@@ -6,7 +6,7 @@ class HomePage:
     def __init__(self, page):
         self.page = page
         self.logo = page.get_by_role("link", name="GeeksforGeeks").first
-        self.search_input = page.locator("input[type='search']").first
+        self.search_input = page.locator("input[type='text']").first
         self.nav_courses = page.get_by_role("link", name="Courses")
 
     def goto(self):
