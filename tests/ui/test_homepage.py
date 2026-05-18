@@ -8,6 +8,7 @@ def test_homepage_title(page):
     home = HomePage(page)
     home.goto()
     assert "GeeksforGeeks" in home.get_title()
+    # assert "WRONGTEXT" in home.get_title()
     page.screenshot(path="screenshots/homepage.png")
 
 def test_logo_visible(page):

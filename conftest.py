@@ -19,3 +19,16 @@ def page(browser):
 @pytest.fixture
 def test_pages():
     return load_test_data()
+
+@pytest.fixture(autouse=True)
+def screenshot_on_failure(request, page):
+    yield
+    if request.node.rep_call.failed:
+        name = request.node.name.replace("/", "_")
+        page.screenshot(path=f"screenshots/FAIL_{name}.png")
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
