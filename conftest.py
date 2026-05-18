@@ -32,3 +32,11 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
     setattr(item, "rep_" + rep.when, rep)
+
+def pytest_configure(config):
+    config._metadata = {
+        "Project": "GFG QA Automation",
+        "Tester": "Jyoti Sharma",
+        "Environment": "Production",
+        "Base URL": "https://www.geeksforgeeks.org"
+    }
