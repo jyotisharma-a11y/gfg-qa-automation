@@ -1,5 +1,6 @@
 # conftest — shared fixtures will go here
 import pytest
+import requests
 from playwright.sync_api import sync_playwright
 from utils.helpers import load_test_data
 
@@ -40,3 +41,11 @@ def pytest_configure(config):
         "Environment": "Production",
         "Base URL": "https://www.geeksforgeeks.org"
     }
+
+
+@pytest.fixture(scope="session")
+def api_session():
+    s = requests.Session()
+    s.headers.update({"User-Agent": "GFG-QA-Bot/1.0"})
+    yield s
+    s.close()
