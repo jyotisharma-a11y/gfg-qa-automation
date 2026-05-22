@@ -1,4 +1,4 @@
-# GFG QA Automation Suite
+![GFG QA Suite](https://github.com/jyotisharma-a11y/gfg-qa-automation/actions/workflows/tests.yml/badge.svg)# GFG QA Automation Suite
 
 Automated test suite for GeeksforGeeks web app.
 Built with Python, Playwright, Pytest, and GitHub Actions.
