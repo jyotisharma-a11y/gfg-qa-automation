@@ -20,17 +20,12 @@ jobs:
           python-version: '3.12'
       
       - name: Install system dependencies
-        run: sudo apt-get install -y libasound2t64
+        run: sudo apt-get install -y libasound2t64 libgstreamer1.0-0
 
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          playwright install --with-deps chromium
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          playwright install --with-deps chromium
+          playwright install chromium
 
 
       - name: Run smoke tests
