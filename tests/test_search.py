@@ -1,4 +1,5 @@
 import pytest
+from utils.helpers import load_test_data, log_result
 from conftest import page
 from pages.home_page import HomePage
 from pages.search_results_page import SearchResultsPage
@@ -14,9 +15,13 @@ def test_search_python(page):
     home.goto()
     home.search("python")
     search_results = SearchResultsPage(page)
-    assert "python" in search_results.get_url().lower() or search_results.has_results()
-
-    page.screenshot(path="screenshots/search_python.png")
+    try:
+        assert "python" in search_results.get_url().lower() or search_results.has_results()
+        page.screenshot(path="screenshots/search_python.png")
+        log_result("test_search_python", True)
+    except AssertionError as e:
+        log_result("test_search_python", False, str(e))
+        raise
 
 def test_search_java(page):
     # same flow but search for "java"
@@ -25,5 +30,11 @@ def test_search_java(page):
     home.goto()
     home.search("java")
     search_results = SearchResultsPage(page)
-    assert search_results.has_results()
-    page.screenshot(path="screenshots/search_java.png")
+    try:
+        assert search_results.has_results()
+        page.screenshot(path="screenshots/search_java.png")
+        log_result("test_search_java", True)
+    except AssertionError as e:
+        log_result("test_search_java", False, str(e))
+        raise
+    

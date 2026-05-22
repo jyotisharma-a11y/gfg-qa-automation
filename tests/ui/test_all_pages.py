@@ -1,5 +1,5 @@
 import pytest
-from utils.helpers import load_test_data
+from utils.helpers import load_test_data , log_result
 
 pages_data = load_test_data()
 
@@ -9,9 +9,14 @@ pages_data = load_test_data()
 def test_page_loads(page, page_data):
     page.goto(page_data["url"])
     page.wait_for_load_state("domcontentloaded")
-    assert page.title() != ""
-    assert page_data["title"].lower() in page.title().lower()
-    page.screenshot(path=f"screenshots/{page_data['id']}.png")
+    try:
+        assert page.title() != ""
+        assert page_data["title"].lower() in page.title().lower()
+        page.screenshot(path=f"screenshots/{page_data['id']}.png")
+        log_result(f"test_page_loads[{page_data['id']}]", True)
+    except AssertionError as e:
+        log_result(f"test_page_loads[{page_data['id']}]", False, str(e))
+        raise
     # 1. go to page_data["url"]
     # 2. wait_for_load_state "domcontentloaded"
     # 3. assert page title is not empty
