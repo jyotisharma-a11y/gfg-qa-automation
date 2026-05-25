@@ -1,49 +1,49 @@
-name: GFG QA Suite
+  name: GFG QA Suite
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+  jobs:
+    test:
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      
-      - name: Install system dependencies
-        run: sudo apt-get install -y libasound2t64 libgstreamer1.0-0
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.12'
+        
+        - name: Install system dependencies
+          run: sudo apt-get install -y libasound2t64 libgstreamer1.0-0
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          playwright install chromium
+        - name: Install dependencies
+          run: |
+            pip install -r requirements.txt
+            playwright install chromium
 
 
-      - name: Run smoke tests
-        run: pytest -m smoke -v
+        - name: Run smoke tests
+          run: pytest -m smoke -v
 
-      - name: Run full suite
-        run: pytest tests/ -v --html=reports/report.html --self-contained-html
+        - name: Run full suite
+          run: pytest tests/ -v --html=reports/report.html --self-contained-html
 
-        - name: Upload HTML report
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: test-report
-          path: reports/report.html
+          - name: Upload HTML report
+          uses: actions/upload-artifact@v4
+          if: failure()
+          with:
+            name: test-report
+            path: reports/report.html
 
-      - name: Upload failure screenshots
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: failure-screenshots
-          path: screenshots/
+        - name: Upload failure screenshots
+          uses: actions/upload-artifact@v4
+          if: failure()
+          with:
+            name: failure-screenshots
+            path: screenshots/
