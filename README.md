@@ -25,15 +25,5 @@ playwright install chromium
 pytest tests/ -v
 ```
 
-## Project status
-Day 1 — project skeleton created
 
-## Changelog
-
-### Week 3
-- Added API health tests (8 tests)
-- Added API performance tests (8 tests)
-- Added api_session fixture in conftest
-- Wired log_result to all tests
-- Logs writing to logs/run.log on every test run
 
