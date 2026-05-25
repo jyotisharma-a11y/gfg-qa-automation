@@ -33,3 +33,17 @@ jobs:
 
       - name: Run full suite
         run: pytest tests/ -v --html=reports/report.html --self-contained-html
+
+        - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-report
+          path: reports/report.html
+
+      - name: Upload failure screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: failure-screenshots
+          path: screenshots/
