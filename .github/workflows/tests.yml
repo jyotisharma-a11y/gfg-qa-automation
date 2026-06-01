@@ -64,4 +64,25 @@ jobs:
         if: failure()
         with:
           name: failure-screenshots
-          path: screenshots/  
+          path: screenshots/ 
+
+      - name: Notify Zoho Cliq
+        if: always()
+        run: |
+          STATUS="✅ Smoke passed"
+          if [ "${{ job.status }}" != "success" ]; then
+            STATUS="❌ Smoke failed"
+          fi
+          curl -X POST "${{ secrets.ZOHO_CLIQ_WEBHOOK }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\": \"$STATUS — GFG QA Suite\"}"
+      - name: Notify Zoho Cliq
+        if: always()
+        run: |
+          STATUS="✅ All 31 tests passed"
+          if [ "${{ job.status }}" != "success" ]; then
+            STATUS="❌ Full suite failed"
+          fi
+          curl -X POST "${{ secrets.ZOHO_CLIQ_WEBHOOK }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\": \"$STATUS — GFG QA Suite\"}" 
